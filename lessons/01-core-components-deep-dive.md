@@ -20,6 +20,18 @@ Lesson 00 gave us the mental model. Now we map the pieces. This lesson is delibe
 - Security
 - Deployment
 
+
+## Recommended hands-on example — Map every Strands component onto one future incident assistant
+
+> **Scenario:** Eventually the course will build a payments-api incident assistant.
+>
+> While reading this lesson, map each component to that one system: **Agent** = incident commander, **model** = decision engine, **tools** = service/telemetry capabilities, **context** = current investigation evidence, **session** = incident continuity, **hooks** = deterministic policy, **specialist Agents** = domain workers, **telemetry** = how you explain cost/latency/failures.
+>
+> **Why this example:** Lesson 01 is intentionally broad. Using one future application stops the component map from feeling like a vocabulary list.
+
+You are not expected to implement the whole system today. The implementation starts small in Lesson 02 and grows one capability at a time.
+
+
 ## 1. Agent: the application-facing entry point
 
 The Agent object is the unit you normally invoke.
