@@ -26,6 +26,38 @@ For each lesson:
 4. Complete the production checklist.
 5. Add at least one test before moving on.
 
+## The running hands-on example
+
+This course does not use a completely unrelated demo in every lesson.
+
+From Lesson 00 onward, the recommended labs grow one system: a **Payments API Incident Assistant**. Every lesson begins with a clearly marked **Recommended hands-on example** that tells you what to build, what to run, what to observe, and why that example matters.
+
+| Lesson | Recommended example progression |
+| --- | --- |
+| 00 | One Agent + one safe `get_service_status` tool |
+| 01 | Map every Strands component onto the future incident assistant |
+| 02 | Build the first working payments-api status assistant |
+| 03 | Trace the complete model → tool → model loop and its budgets |
+| 04 | Run the same incident task on different model providers |
+| 05 | Add authoritative AWS documentation through MCP |
+| 06 | Stream a live incident investigation safely |
+| 07 | Block an attempted production restart with a deterministic hook |
+| 08 | Package the incident-response procedure as a Skill |
+| 09 | Use Steering to improve a wasteful/failed investigation path |
+| 10 | Control context growth from long logs and tool results |
+| 11 | Resume the same incident after process restart |
+| 12 | Split the assistant into Incident Commander + specialist Agents |
+| 13 | Express the investigation as a controlled Graph |
+| 14 | Compare a Swarm and measure autonomous handoff cost/behavior |
+| 15 | Move one specialist behind an A2A service boundary |
+| 16 | Turn incident scenarios into a repeatable evaluation suite |
+| 17 | Trace one slow incident end to end and explain the latency |
+| 18 | Red-team prompt injection, tool-output injection, PII, and IAM |
+| 19 | Deploy the same assistant to AgentCore instead of starting a new demo |
+| 20 | Build, test, deploy, observe, and roll back the complete production system |
+
+The recommendation is simple: **run the highlighted example first, then read the deeper sections.** The theory will make more sense because you already know which concrete problem it is explaining.
+
 ## Roadmap
 
 ### Phase 1 — Core Agent Mechanics
