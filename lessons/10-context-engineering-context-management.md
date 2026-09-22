@@ -22,6 +22,22 @@ Session persistence, which comes next, answers a different question: what should
 - Security/PII
 - Testing context-management behavior
 
+
+## Recommended hands-on example — Keep a large log investigation inside a useful context
+
+> **Build today:** Continue the payments-api incident after several tool calls have produced long log/document results, then enable the documented Strands context-management mode.
+>
+> **Run:** `We already checked several logs. Using the important evidence we have, what should we investigate next for payments-api?`
+>
+> **Compare:** run once with unmanaged growing history and once with the context-management approach taught in this lesson.
+>
+> **Observe:** input-token growth, what information remains available, whether important incident facts survive, and whether huge tool output stops dominating later turns.
+>
+> **Why this example:** context management becomes concrete when the learner can watch an investigation become expensive/noisy and then see the working set become useful again.
+
+Do not use context reduction as an excuse to put secrets or unrestricted raw logs into the model in the first place.
+
+
 ## 1. Context is the model’s working set
 
 A useful analogy:
