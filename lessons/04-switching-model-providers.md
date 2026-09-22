@@ -21,6 +21,20 @@ Changing a model can change tool selection, latency, cost, structured-output qua
 - A provider evaluation matrix
 - Testing a provider migration
 
+
+## Recommended hands-on example — Run the same incident prompt on two models
+
+> **Build today:** Keep the Payments API Incident Assistant unchanged and swap only its model provider.
+>
+> **Run on both providers:** `Check payments-api. If it is degraded, tell me the next diagnostic step without inventing a root cause.`
+>
+> **Compare:** Did both models call the same tool? Did they pass the same argument? How many turns/tokens did each use? Which was faster? Did either invent unsupported detail?
+>
+> **Why this example:** provider portability should be measured with the *same task*. If you change the prompt, tools, and provider together, you cannot tell what caused the behavior change.
+
+Your goal is not to decide that one provider is universally “best.” Your goal is to prove whether a provider change preserves the behavior this application needs.
+
+
 ## 1. The stable part of the application
 
 At a high level:
