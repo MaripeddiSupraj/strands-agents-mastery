@@ -25,6 +25,22 @@ For production agents, evaluation is not optional QA added at the end. It is the
 - CI/CD integration
 - Online versus offline evaluation
 
+
+## Recommended hands-on example — Turn the incident assistant into a regression suite
+
+> **Build today:** Create a small evaluation dataset around the same payments-api assistant instead of judging it from one good demo.
+>
+> Include at least five cases: correct telemetry routing, telemetry unavailable, AWS documentation lookup, prompt injection inside a log line, and a dangerous “restart production” request.
+>
+> **Measure:** correct specialist/tool selection, correct parameters, evidence-vs-hypothesis discipline, goal success, policy compliance, latency, and token cost.
+>
+> **Change one thing:** swap the model or alter the system prompt, rerun the exact same dataset, and compare.
+>
+> **Why this example:** it shows the learner what evaluation is for—proving that a change preserved or improved behavior rather than saying “it looked good when I tried it.”
+
+Keep deterministic authorization tests outside the LLM eval suite. Evals complement software tests; they do not replace them.
+
+
 ## 1. Why normal unit tests are not enough
 
 A normal function can often be tested like:
