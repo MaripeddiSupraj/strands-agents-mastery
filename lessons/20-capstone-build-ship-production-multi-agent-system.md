@@ -454,6 +454,8 @@ Good descriptions improve routing. They do not grant permissions.
 
 Create:
 
+**Code sample — illustrative**
+
 ~~~text
 skills/incident-response/SKILL.md
 ~~~
@@ -761,6 +763,8 @@ Track limit stop reasons rather than hiding them as generic failures.
 
 A useful answer is evidence-first:
 
+**Code sample — illustrative**
+
 ~~~text
 Incident: INC-2841
 
@@ -820,6 +824,8 @@ Examples include:
 Build the runtime policy from the exact MCP operations you enable.
 
 Do **not** grant:
+
+**Code sample — illustrative**
 
 ~~~text
 cloudwatch:*
@@ -1409,6 +1415,8 @@ Use federated GitHub OIDC rather than long-lived AWS access keys where available
 
 Run a harmless request:
 
+**Code sample — illustrative**
+
 ~~~text
 "Explain what evidence you would gather for an API latency incident.
 Do not change any resources."
@@ -1575,6 +1583,8 @@ Specialist agents multiply calls.
 
 Keep the topology bounded:
 
+**Code sample — illustrative**
+
 ~~~text
 outer incident request:
   max 8 turns
@@ -1597,6 +1607,8 @@ Do not let specialists call the commander or each other unless there is a measur
 A session identifier is not authorization.
 
 A useful logical key might combine:
+
+**Code sample — illustrative**
 
 ~~~text
 tenant + incident + authorized actor scope
