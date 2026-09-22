@@ -33,39 +33,39 @@ For each lesson:
 - 🟢 [00 — What Is Strands Agents?](lessons/00-what-is-strands-agents.md)
 - 🟢 [01 — Core Components Deep Dive](lessons/01-core-components-deep-dive.md)
 - 🟢 [02 — Your First Agent, Hands-On](lessons/02-your-first-agent-hands-on.md)
-- 🟡 [03 — How Agents Really Work](lessons/03-how-agents-really-work.md)
-- 🟡 [04 — Switching Model Providers](lessons/04-switching-model-providers.md)
+- 🟢 [03 — How Agents Really Work](lessons/03-how-agents-really-work.md)
+- 🟢 [04 — Switching Model Providers](lessons/04-switching-model-providers.md)
 
 ### Phase 2 — Tools & Interaction
 
-- 🟡 [05 — Giving Your Agent Tools via MCP](lessons/05-giving-your-agent-tools-via-mcp.md)
-- 🟡 [06 — Callbacks & Response Streaming](lessons/06-callbacks-response-streaming.md)
-- 🟡 [07 — Controlling Your Agent With Hooks](lessons/07-controlling-your-agent-with-hooks.md)
-- 🟡 [08 — Agent Plugins & Skills](lessons/08-agent-plugins-skills.md)
-- 🟡 [09 — Improving Reliability with Strands Steering](lessons/09-improving-reliability-with-strands-steering.md)
+- 🟢 [05 — Giving Your Agent Tools via MCP](lessons/05-giving-your-agent-tools-via-mcp.md)
+- 🟢 [06 — Callbacks & Response Streaming](lessons/06-callbacks-response-streaming.md)
+- 🟢 [07 — Controlling Your Agent With Hooks](lessons/07-controlling-your-agent-with-hooks.md)
+- 🟢 [08 — Agent Plugins & Skills](lessons/08-agent-plugins-skills.md)
+- 🟢 [09 — Improving Reliability with Strands Steering](lessons/09-improving-reliability-with-strands-steering.md)
 
 ### Phase 3 — Memory & Context
 
-- 🟡 [10 — Context Engineering & Context Management](lessons/10-context-engineering-context-management.md)
-- 🟡 [11 — Persistent Memory with Session Managers](lessons/11-persistent-memory-with-session-managers.md)
+- 🟢 [10 — Context Engineering & Context Management](lessons/10-context-engineering-context-management.md)
+- 🟢 [11 — Persistent Memory with Session Managers](lessons/11-persistent-memory-with-session-managers.md)
 
 ### Phase 4 — Multi-Agent Systems
 
-- 🟡 [12 — Multi-Agent Patterns: Agents as Tools](lessons/12-multi-agent-patterns-agents-as-tools.md)
-- 🟡 [13 — Multi-Agent Patterns: Graph Workflows](lessons/13-multi-agent-patterns-graph-workflows.md)
-- 🟡 [14 — Multi-Agent Patterns: Agent Swarms](lessons/14-multi-agent-patterns-agent-swarms.md)
-- 🟡 [15 — Agent2Agent (A2A): Talking to Remote Agents](lessons/15-agent2agent-a2a-talking-to-remote-agents.md)
+- 🟢 [12 — Multi-Agent Patterns: Agents as Tools](lessons/12-multi-agent-patterns-agents-as-tools.md)
+- 🟢 [13 — Multi-Agent Patterns: Graph Workflows](lessons/13-multi-agent-patterns-graph-workflows.md)
+- 🟢 [14 — Multi-Agent Patterns: Agent Swarms](lessons/14-multi-agent-patterns-agent-swarms.md)
+- 🟢 [15 — Agent2Agent (A2A): Talking to Remote Agents](lessons/15-agent2agent-a2a-talking-to-remote-agents.md)
 
 ### Phase 5 — Production Readiness
 
-- 🟡 [16 — Evaluating Agents](lessons/16-evaluating-agents.md)
-- 🟡 [17 — Observability: Traces, Metrics & Logs](lessons/17-observability-traces-metrics-logs.md)
-- 🟡 [18 — Security: Guardrails, PII Redaction & Responsible AI](lessons/18-security-guardrails-pii-redaction-responsible-ai.md)
-- 🟡 [19 — Deploying Agents to the Cloud](lessons/19-deploying-agents-to-the-cloud.md)
+- 🟢 [16 — Evaluating Agents](lessons/16-evaluating-agents.md)
+- 🟢 [17 — Observability: Traces, Metrics & Logs](lessons/17-observability-traces-metrics-logs.md)
+- 🟢 [18 — Security: Guardrails, PII Redaction & Responsible AI](lessons/18-security-guardrails-pii-redaction-responsible-ai.md)
+- 🟢 [19 — Deploying Agents to the Cloud](lessons/19-deploying-agents-to-the-cloud.md)
 
 ### Phase 6 — Capstone
 
-- 🟡 [20 — Capstone: Build & Ship a Production Multi-Agent System](lessons/20-capstone-build-ship-production-multi-agent-system.md)
+- 🟢 [20 — Capstone: Build & Ship a Production Multi-Agent System](lessons/20-capstone-build-ship-production-multi-agent-system.md)
 
 ## Course standard
 
