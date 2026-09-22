@@ -23,6 +23,22 @@ This lesson separates three ideas:
 - Observability
 - Testing streams
 
+
+## Recommended hands-on example — Stream an incident investigation to the user
+
+> **Build today:** Stream progress from the same incident assistant while it performs a documentation/tool lookup.
+>
+> **Run:** `Investigate the payments-api throttling symptom and explain the next safe diagnostic step.`
+>
+> **User experience to aim for:** show a safe status such as “Checking AWS documentation…” quickly, stream the final explanation as it becomes available, then emit one clear completion event.
+>
+> **Observe:** time to first useful output, tool-start/tool-end timing, final task duration, and what internal events you intentionally *do not* expose to the browser.
+>
+> **Why this example:** learners can see that streaming is an interface/UX concern around the same agent loop—not a different kind of agent.
+
+Do not forward raw MCP/tool payloads just because they appear in the event stream.
+
+
 ## 1. Non-streaming invocation
 
 The ordinary call waits until the agent invocation completes.
