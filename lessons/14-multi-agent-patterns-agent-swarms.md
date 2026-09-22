@@ -26,6 +26,20 @@ It also creates a more emergent execution path, which means safety limits, descr
 - Evaluation
 - When Swarm is and is not appropriate
 
+
+## Recommended hands-on example — Let specialists decide the next owner, then measure the cost
+
+> **Build today:** Give a small Swarm three incident roles: observability investigator, AWS architecture specialist, and incident reviewer.
+>
+> **Run:** `payments-api has intermittent 5xx errors and elevated latency. Collaborate to identify the strongest evidence and the next diagnostic step.`
+>
+> **Observe:** handoff sequence, repeated handoffs, total model calls, latency, token cost, and whether the final path was actually better than the controlled Agents-as-Tools/Graph versions.
+>
+> **Why this example:** a Swarm only makes sense when the best next specialist genuinely emerges from what another specialist discovers. This lab lets learners see the extra autonomy *and* the extra operational uncertainty.
+
+The teaching goal is not “Swarm is more advanced, therefore better.” Compare it against Lessons 12 and 13 and keep the simplest orchestration that meets the requirement.
+
+
 ## 1. Graph versus Swarm
 
 Graph:
