@@ -24,6 +24,24 @@ Do not confuse session persistence with semantic long-term memory. A session man
 - Migration/versioning
 - Testing restore behavior
 
+
+## Recommended hands-on example — Resume the same incident after a restart
+
+> **Build today:** Persist one payments-api incident session, destroy/recreate the Agent process, and resume with the same approved session identity.
+>
+> **Turn 1:** `INC-2841: payments-api started returning 5xx errors around 10:12 UTC. We found latency increased too.`
+>
+> **Restart the process**, then run:
+>
+> **Turn 2:** `Continue INC-2841. What have we already established, and what should we check next?`
+>
+> **Observe:** which messages/state are restored, where the session is stored, what happens with a wrong session ID, and how session ownership is enforced.
+>
+> **Why this example:** it clearly separates **context management** (“what the model sees now”) from **session persistence** (“what survives process lifetime”).
+
+A session ID is an identifier, not authentication. Never let users read another incident merely by supplying its ID.
+
+
 ## 1. Without a session manager
 
 A process-local Agent can remember messages while it lives:
