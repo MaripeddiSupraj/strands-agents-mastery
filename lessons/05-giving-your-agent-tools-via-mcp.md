@@ -23,6 +23,22 @@ An MCP connection can make remote or local executable capabilities available to 
 - Failure handling and testing
 - Production architecture
 
+
+## Recommended hands-on example — Add authoritative AWS documentation through MCP
+
+> **Build today:** Give the incident assistant one external MCP capability: the AWS Documentation MCP server.
+>
+> **Run:** `payments-api is returning throttling errors. Find the relevant AWS documentation and explain what throttling means before suggesting a next check.`
+>
+> **Expected behavior:** the agent discovers/calls the documentation tool, returns documentation-backed service behavior, and clearly separates that documentation from evidence about *your* payments-api.
+>
+> **Observe:** MCP connection lifecycle, discovered tool names, selected tool, tool latency, and the amount of tool output added to context.
+>
+> **Why this example:** it demonstrates exactly why MCP exists—an external, reusable capability becomes available without rewriting it as a local Strands tool.
+
+Keep the MCP server read-only for this lesson. Tool discovery is a capability boundary, not just a convenience.
+
+
 ## 1. The mental model
 
 Without MCP:
