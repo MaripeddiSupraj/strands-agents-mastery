@@ -32,6 +32,8 @@ This course does not use a completely unrelated demo in every lesson.
 
 From Lesson 00 onward, the recommended labs grow one system: a **Payments API Incident Assistant**. Every lesson begins with a clearly marked **Recommended hands-on example** that tells you what to build, what to run, what to observe, and why that example matters.
 
+**Runnable code lives separately in [`examples/`](examples/README.md).** Each lesson has its own matching example folder so the lesson can stay focused on explanation while the lab stays focused on execution.
+
 | Lesson | Recommended example progression |
 | --- | --- |
 | 00 | One Agent + one safe `get_service_status` tool |
