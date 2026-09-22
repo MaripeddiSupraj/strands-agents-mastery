@@ -50,6 +50,22 @@ The capstone uses AgentCore Runtime.
 - Rollback
 - Choosing a target
 
+
+## Recommended hands-on example — Deploy the same incident assistant, not a new hello-world Agent
+
+> **Build today:** Package the payments-api incident assistant you already understand and deploy it to the current AgentCore Runtime path.
+>
+> **Local proof:** run the core Agent without the cloud host adapter.
+>
+> **Deployment proof:** build one immutable artifact, deploy it with a least-privilege runtime role, invoke it through the deployed endpoint, and run a harmless incident prompt.
+>
+> **Verify:** runtime identity, endpoint response, session behavior, traces, token/tool metrics, MCP connectivity, and a post-deploy synthetic check.
+>
+> **Why this example:** learners see what deployment actually changes: packaging, identity, networking, state, scaling, and operations. The Strands reasoning code should not be rewritten just because the compute target changed.
+
+Do not count “Terraform apply succeeded” or “agentcore deploy returned success” as the final test. Invoke the real service path.
+
+
 ## 1. The Agent does not need to be rewritten for every host
 
 The same core Agent can sit behind different entry points.
