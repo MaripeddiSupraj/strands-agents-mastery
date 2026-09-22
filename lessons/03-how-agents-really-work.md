@@ -20,6 +20,22 @@ This lesson goes deeper than the happy path.
 - A production loop policy
 - Tests to write before adding more capabilities
 
+
+## Recommended hands-on example — Payments API Incident Assistant
+
+> **Build today:** Trace one complete agent loop around a safe `get_service_status` tool.
+>
+> **Run:** `Check payments-api. If it is degraded, tell me the next diagnostic step without inventing a root cause.`
+>
+> **Expected flow:** user → model → `get_service_status("payments-api")` → tool result → model → final answer.
+>
+> **Observe:** the number of model turns, the tool call, total tokens, latency, and the final `stop_reason`.
+>
+> **Why this example:** it makes the agent loop visible. Do not move on until you can point to every model call and tool call in the trace.
+
+Keep this same incident assistant for later lessons. Each lesson will add one production capability instead of starting from a completely different demo.
+
+
 ## 1. The core loop
 
 A useful mental model is:
