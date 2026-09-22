@@ -51,6 +51,8 @@ pip install 'strands-agents[anthropic]'
 
 It also documents:
 
+**Code sample — verified**
+
 ~~~bash
 pip install 'strands-agents[all]'
 ~~~
