@@ -36,6 +36,24 @@ That gives you a useful balance:
 - Testing graphs
 - Graph versus Workflow, Agents-as-Tools, and Swarm
 
+
+## Recommended hands-on example — Make the incident investigation path explicit
+
+> **Build today:** Express a payments-api investigation as a Graph where the application controls the allowed path:
+>
+> `collect evidence → analyze evidence → independently check AWS docs → produce incident report`
+>
+> Add a review/revisit path only when the analysis says evidence is insufficient.
+>
+> **Run:** `Investigate INC-2841 and produce an evidence-backed incident summary.`
+>
+> **Observe:** node order, parallel/conditional paths where used, revisit count, timeout/iteration bounds, and the output contributed by each node.
+>
+> **Why this example:** the learner can compare it directly with Lesson 12. Agents-as-Tools lets the commander choose delegation dynamically; Graph makes the allowed workflow itself explicit.
+
+Use the verified `GraphBuilder` syntax later in this lesson. The block above is the recommended scenario, not a substitute API.
+
+
 ## 1. Why Graph exists
 
 Imagine a report pipeline:
