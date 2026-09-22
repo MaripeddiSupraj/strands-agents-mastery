@@ -14,6 +14,22 @@ This lesson turns the component map into something you can run. Keep the first a
 - Diagnose common failures
 - Define a small test boundary
 
+
+## Recommended hands-on example — Start the running Payments API Incident Assistant
+
+> **Build today:** Use the lesson's `get_service_status` tool as the first version of the course's running incident assistant.
+>
+> **Run:** `Check payments-api. If it is degraded, explain what you know without inventing a root cause.`
+>
+> **Expected behavior:** one safe tool call, one bounded result, and a final answer that distinguishes the returned status from unsupported explanation.
+>
+> **Observe:** loaded tool names, token usage, tool metrics, and the effect of input validation.
+>
+> **Why this example:** this becomes the baseline. Lessons 03–20 will keep the same story and add loop control, providers, MCP, streaming, hooks, memory, multi-agent orchestration, evaluation, security, and deployment.
+
+Save this working baseline before adding anything else.
+
+
 ## 1. Prerequisites
 
 Current Python quickstart requirements:
