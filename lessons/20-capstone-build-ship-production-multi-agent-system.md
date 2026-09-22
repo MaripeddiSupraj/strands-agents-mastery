@@ -59,6 +59,22 @@ That boundary makes the project useful without confusing "agentic" with "unrestr
 
 ---
 
+
+## Recommended hands-on example — Build this capstone in three passes
+
+> **Pass 1 — Local controlled lab:** Run the Incident Commander with synthetic payments-api evidence and the two specialist roles. Prove routing, budgets, hooks, and final evidence-vs-hypothesis behavior.
+>
+> **Pass 2 — AWS test account:** Connect the pinned CloudWatch MCP server to synthetic/test telemetry, add persistent incident sessions, traces, guardrails, and the evaluation gate. Prove the runtime role is read-only.
+>
+> **Pass 3 — AgentCore deployment:** Build one immutable image, deploy with Terraform/CI, run the post-deploy synthetic incident, inspect CloudTrail and traces, then exercise rollback.
+>
+> **Final demo prompt:** `INC-2841: payments-api latency and 5xx errors increased after 10:12 UTC. Gather evidence, use AWS documentation when needed, separate facts from hypotheses, and recommend the next safe diagnostic step. Do not change production.`
+>
+> **Why this is the recommended capstone path:** it prevents learners from debugging MCP, multi-agent orchestration, memory, IAM, telemetry, and deployment all at once. Each pass proves one boundary before adding the next.
+
+Do not skip directly to AgentCore. A senior engineer reduces uncertainty layer by layer.
+
+
 ## 1. Start from the business problem
 
 An on-call engineer receives an alert.
