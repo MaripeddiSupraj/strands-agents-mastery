@@ -411,6 +411,33 @@ Lesson 19 compares the operational tradeoffs rather than treating deployment as 
 
 Keep this table in mind for the rest of the course.
 
+
+## 18. Current Strands Harness: the batteries-included path
+
+The live Strands documentation now has two related layers:
+
+- **Strands Harness SDK** — the lower-level SDK this course teaches so you understand the loop, tools, state, sessions, policy, and orchestration.
+- **Strands harness** — a separately installed, fully assembled harness with tuned defaults for tools, context management, sessions, memory, and hooks.
+
+**Code sample — verified**
+
+~~~bash
+pip install strands-harness
+~~~
+
+~~~python
+from strands_harness import create_harness
+
+agent = create_harness()
+agent("Investigate the payments-api incident and write a concise summary.")
+~~~
+
+The current documentation states that `create_harness()` returns a standard Strands `Agent`, not an unrelated wrapper.
+
+Use the assembled Harness when its defaults fit. Use the lower-level SDK when you need explicit architecture/control. Knowing both prevents a convenience API from becoming hidden magic.
+
+Runnable lab: [harness_quickstart.py](../examples/01-core-components-deep-dive/harness_quickstart.py).
+
 ## Sources checked
 
 - https://strandsagents.com/docs/user-guide/sdk/

@@ -451,6 +451,41 @@ Buffering remains bounded.
 - [ ] Time-to-first-output and total duration are measured.
 - [ ] Streaming compatibility with PII policy is documented.
 
+
+## 16. Advanced/experimental: BidiAgent is a different streaming model
+
+Standard `Agent.stream_async()` remains request/response streaming.
+
+Current Strands also documents `BidiAgent` for persistent bidirectional connections used by realtime voice/audio and interruption-heavy experiences. Strands marks it **experimental** and Python-only at the time of this audit.
+
+**Code sample — verified**
+
+~~~python
+import asyncio
+
+from strands.experimental.bidi import BidiAgent, BidiAudioIO
+from strands.experimental.bidi.models import BedrockNovaSonicModel
+
+model = BedrockNovaSonicModel()
+agent = BidiAgent(
+    model=model,
+    system_prompt="You are a concise incident-response voice assistant.",
+)
+audio_io = BidiAudioIO()
+
+async def main():
+    await agent.run(
+        inputs=[audio_io.input()],
+        outputs=[audio_io.output()],
+    )
+
+asyncio.run(main())
+~~~
+
+Use BidiAgent only when persistent realtime streaming and interruptions are actual requirements.
+
+Runnable experimental lab: [bidi_voice.py](../examples/06-callbacks-response-streaming/bidi_voice.py).
+
 ## Sources checked
 
 - https://strandsagents.com/docs/user-guide/sdk/streaming/async-iterators/

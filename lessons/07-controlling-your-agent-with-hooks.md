@@ -495,6 +495,60 @@ If not, simplify.
 - [ ] Security hooks fail closed.
 - [ ] Unit + integration tests cover policy behavior.
 
+
+## 20. Interventions: the typed production-control layer
+
+Hooks remain the low-level lifecycle primitive. Current Strands also exposes **Interventions**, where an `InterventionHandler` returns typed decisions:
+
+- `Proceed`
+- `Deny`
+- `Guide`
+- `Confirm`
+- `Transform`
+
+**Code sample — verified**
+
+~~~python
+from strands import Agent, tool
+from strands.hooks import BeforeToolCallEvent
+from strands.interventions import Deny, InterventionHandler, Proceed
+
+@tool
+def restart_production_service(service: str) -> str:
+    """Restart a service."""
+    return f"restarted {service}"
+
+class ToolGuard(InterventionHandler):
+    name = "tool-guard"
+
+    def before_tool_call(self, event: BeforeToolCallEvent):
+        if event.tool_use["name"] == "restart_production_service":
+            return Deny(reason="Production restart is not allowed.")
+        return Proceed()
+
+agent = Agent(
+    tools=[restart_production_service],
+    interventions=[ToolGuard()],
+)
+~~~
+
+Prefer interventions when the problem is naturally authorization, guardrails, steering, human confirmation, or content transformation with well-defined semantics. Security-critical handlers should fail closed.
+
+`Confirm` integrates with interrupt/resume for human approval.
+
+Current Strands also ships Cedar Authorization as a vended intervention for identity-aware, default-deny tool policy:
+
+**Code sample — verified**
+
+~~~bash
+pip install 'strands-agents[cedar]'
+~~~
+
+Runnable labs:
+
+- [interventions.py](../examples/07-controlling-your-agent-with-hooks/interventions.py)
+- [cedar_authorization.py](../examples/18-security-guardrails-pii-redaction-responsible-ai/cedar_authorization.py)
+
 ## Sources checked
 
 - https://strandsagents.com/docs/user-guide/concepts/agents/hooks/

@@ -811,6 +811,72 @@ Security behavior should be release evidence, not a wiki promise.
 - [ ] Red-team cases run in CI.
 - [ ] Incident containment/rollback paths exist.
 
+
+## 35. Sandbox model-generated execution
+
+Current Strands has a first-class `Sandbox` abstraction for code, shell, and filesystem operations. Built-in backends include `DockerSandbox` and `SshSandbox`.
+
+**Code sample — verified**
+
+~~~python
+from strands import Agent
+from strands.sandbox.docker import DockerSandbox
+
+sandbox = DockerSandbox(
+    "agent-workspace",
+    working_dir="/workspace",
+    user="1000:1000",
+)
+
+agent = Agent(sandbox=sandbox)
+agent("Run the test suite and summarize failures.")
+~~~
+
+The container must already exist; Strands does not create it.
+
+Current docs warn that omitting an explicit sandbox can leave command/file execution on the host environment. For untrusted input or production code execution, design an explicit isolation boundary.
+
+Sandboxing does not remove the need for CPU/memory/time limits, filesystem policy, network egress controls, secret isolation, non-root users, and container hardening.
+
+Runnable lab: [sandbox.py](../examples/18-security-guardrails-pii-redaction-responsible-ai/sandbox.py).
+
+## 36. Cedar: policy as code at the tool boundary
+
+Current Strands vends Cedar Authorization as an InterventionHandler with default-deny semantics.
+
+**Code sample — verified**
+
+~~~python
+from strands import Agent, tool
+from strands.vended_interventions.cedar import CedarAuthorization
+
+@tool
+def search(query: str) -> str:
+    """Search for information."""
+    return f"Results for: {query}"
+
+@tool
+def delete_record(record_id: str) -> str:
+    """Delete a record by ID."""
+    return f"Deleted {record_id}"
+
+cedar = CedarAuthorization(
+    policies=(
+        'permit(principal, action == Action::"search",'
+        " resource);"
+    ),
+)
+
+agent = Agent(
+    tools=[search, delete_record],
+    interventions=[cedar],
+)
+~~~
+
+No matching `permit` means deny. For multi-tenant agents, resolve identity/role from trusted `invocation_state`, not user prose.
+
+Runnable lab: [cedar_authorization.py](../examples/18-security-guardrails-pii-redaction-responsible-ai/cedar_authorization.py).
+
 ## Sources checked
 
 - https://strandsagents.com/docs/user-guide/sdk/safety-security/guardrails/

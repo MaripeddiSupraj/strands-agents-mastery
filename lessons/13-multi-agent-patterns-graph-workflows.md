@@ -621,6 +621,49 @@ A new edge to a privileged node deserves security review.
 - [ ] Cyclic non-convergence is tested.
 - [ ] Cost impact of fan-out is measured.
 
+
+## 28. Workflow is a distinct multi-agent pattern
+
+Current Strands documents **Workflow** separately from Graph.
+
+Use Workflow when execution is a fixed task sequence/DAG with explicit dependencies.
+
+| Pattern | Who decides the next path? | Best fit |
+| --- | --- | --- |
+| Agents as Tools | Orchestrator model | Dynamic delegation |
+| Graph | Explicit graph structure | Branching/cycles |
+| Swarm | Peer agents | Emergent collaboration |
+| Workflow | Task dependency graph | Repeatable DAG/pipeline |
+
+Current docs show manual workflow composition and a built-in `strands_tools.workflow` tool.
+
+**Code sample — verified**
+
+~~~python
+from strands import Agent
+
+collector = Agent(
+    system_prompt="Collect incident evidence.",
+    callback_handler=None,
+)
+analyst = Agent(
+    system_prompt="Analyze evidence and separate facts from hypotheses.",
+    callback_handler=None,
+)
+writer = Agent(
+    system_prompt="Write a concise incident report.",
+)
+
+def process_workflow(incident: str):
+    evidence = collector(f"Collect evidence for: {incident}")
+    analysis = analyst(f"Analyze this evidence: {evidence}")
+    return writer(f"Write the report from this analysis: {analysis}")
+~~~
+
+Use Workflow instead of Swarm when a different process path would be a bug.
+
+Runnable lab: [workflow.py](../examples/13-multi-agent-patterns-graph-workflows/workflow.py).
+
 ## Sources checked
 
 - https://strandsagents.com/docs/user-guide/sdk/multi-agent/graph/

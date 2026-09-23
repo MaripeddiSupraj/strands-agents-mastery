@@ -545,6 +545,34 @@ Do not judge from prose style alone.
 7. Treat fallback routing as a security/compliance decision.
 8. Keep provider/model identity observable.
 
+
+## 21. Model routing: selecting or failing over between models
+
+Current Strands exposes `ModelRouter` for choosing among a fixed set of stateless candidates.
+
+Use cases include ordered fallback after an unclaimed model failure and routing different request classes to different models.
+
+**Code sample — verified API shape**
+
+~~~python
+from strands import Agent
+from strands.models import BedrockModel, ModelRouter
+
+primary_model = BedrockModel(model_id="<primary-model-id>")
+backup_model = BedrockModel(model_id="<backup-model-id>")
+
+router = ModelRouter(models=[primary_model, backup_model])
+
+agent = Agent(model=router)
+agent("Investigate the payments-api symptom.")
+~~~
+
+Retry and routing are different layers: the selected model's retry strategy gets the first chance; unclaimed failure can then cause a router switch.
+
+Cross-provider routing is also a data/compliance boundary. Every fallback candidate must be approved for the same workload data.
+
+Runnable lab: [model_routing.py](../examples/04-switching-model-providers/model_routing.py).
+
 ## Sources checked
 
 - https://strandsagents.com/docs/user-guide/concepts/model-providers/

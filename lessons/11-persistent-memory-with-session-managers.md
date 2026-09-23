@@ -551,6 +551,64 @@ Lesson 19/20 will put this into a deployable architecture.
 - [ ] Session schema/version upgrades are tested.
 - [ ] Context management limits what restored history reaches the model.
 
+
+## 27. State: conversation history, Agent state, and invocation state are different
+
+Current Strands explicitly separates:
+
+1. **Conversation history** — model-visible messages.
+2. **Agent/app state** — key-value state outside model context, maintained across requests.
+3. **Invocation state** — request-scoped data that survives loop cycles for one invocation and is not automatically placed in model context.
+
+**Code sample — verified**
+
+~~~python
+from strands import Agent, ToolContext, tool
+
+@tool(context=True)
+def whoami(tool_context: ToolContext) -> str:
+    """Return trusted user ID from invocation state."""
+    user_id = tool_context.invocation_state.get("user_id", "unknown")
+    return f"Current user: {user_id}"
+
+agent = Agent(tools=[whoami])
+
+result = agent(
+    "Who am I?",
+    invocation_state={"request_id": "r-42", "user_id": "u-1"},
+)
+~~~
+
+Keep trusted identity/tenant metadata in application state rather than natural-language prompts where possible.
+
+Runnable lab: [state.py](../examples/11-persistent-memory-with-session-managers/state.py).
+
+## 28. Session persistence is not long-term memory
+
+A **SessionManager** persists a conversation so that session can resume.
+
+A **MemoryManager** carries durable knowledge across different sessions without replaying old conversations. Current MemoryManager supports recall, automatic injection, and optional writes/extraction through memory stores.
+
+**Code sample — verified**
+
+~~~python
+from strands import Agent
+from strands.memory import MemoryManager
+from strands.vended_memory_stores.test_memory_store import TestMemoryStore
+
+store = TestMemoryStore(name="incident-notes")
+
+agent = Agent(
+    memory_manager=MemoryManager(stores=[store]),
+)
+~~~
+
+The test store is for learning/tests. Current Strands also provides a Bedrock Knowledge Base store for a managed production backend and supports custom stores.
+
+Memory writing is opt-in. Scope stores by tenant, define retention/deletion, and do not automatically remember secrets or PII.
+
+Runnable lab: [long_term_memory.py](../examples/11-persistent-memory-with-session-managers/long_term_memory.py).
+
 ## Sources checked
 
 - https://strandsagents.com/docs/user-guide/concepts/agents/session-management/

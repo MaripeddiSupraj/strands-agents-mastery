@@ -588,6 +588,35 @@ The lesson is not “higher is better.” It is to learn how task quality change
 7. Traces and metrics are inspected while developing, not after launch.
 8. A budget limit is not an authorization boundary.
 
+
+## 20. Tool executors: concurrent by default, sequential when order matters
+
+Current Strands runs multiple tool calls returned in one model turn concurrently by default.
+
+When order or side effects matter, configure the sequential executor.
+
+**Code sample — verified**
+
+~~~python
+from strands import Agent
+from strands.tools.executors import SequentialToolExecutor
+
+agent = Agent(
+    tool_executor=SequentialToolExecutor(),
+    tools=[step_one, step_two],
+)
+~~~
+
+Production implications:
+
+- concurrency only happens when the model returns multiple tool requests in the same turn;
+- concurrent tool events can interleave;
+- sequential cancellation can prevent later tools from starting;
+- already-running concurrent tools need cooperative cancellation;
+- dependent writes should not be made concurrent merely for lower latency.
+
+Runnable lab: [tool_executor.py](../examples/03-how-agents-really-work/tool_executor.py).
+
 ## Sources checked
 
 - https://strandsagents.com/docs/user-guide/concepts/agents/agent-loop/

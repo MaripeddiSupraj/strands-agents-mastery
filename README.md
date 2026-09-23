@@ -6,13 +6,19 @@ This repository is Python-first. TypeScript differences are called out where the
 
 ## Documentation freshness
 
-The course is maintained against the live Strands documentation and source. The current revision was re-verified on **2026-09-22** against:
+The course is maintained against the live Strands documentation and source. The current revision was re-verified on **2026-09-23** against:
 
 - https://strandsagents.com/docs/
 - https://github.com/strands-agents/harness-sdk
 - https://github.com/strands-agents
 
 Strands evolves quickly. Every lesson distinguishes code copied or directly matched to official documentation as **verified** from examples that are intentionally course-authored as **illustrative**.
+
+## Current Strands surface audit
+
+The live SDK moves quickly. This revision explicitly covers the major current production surfaces that were missing or only implicit in the original roadmap: Strands Harness, structured output, model routing, tool executors, Interventions/HITL/Cedar, state and invocation state, long-term MemoryManager, Workflow, and Sandbox. BidiAgent is included as an experimental advanced path.
+
+See [Current Strands surface map](appendices/current-strands-surface-map.md) for the maintained coverage matrix and the features intentionally treated as specialized or experimental.
 
 ## How to use this course
 
