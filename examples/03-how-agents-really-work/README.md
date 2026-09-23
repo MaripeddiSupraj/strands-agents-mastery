@@ -18,3 +18,11 @@ python main.py
 - total tokens
 - console OpenTelemetry spans
 - what happens if you lower `turns`
+
+## Additional current lab — Tool executors
+
+```bash
+python tool_executor.py
+```
+
+Compare concurrent (default) and sequential execution. Parallel behavior still depends on the model returning multiple tool calls in one turn.

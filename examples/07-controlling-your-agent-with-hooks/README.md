@@ -14,3 +14,11 @@ python main.py
 The `restart_production_service` function is deliberately fake. If you ever see `SHOULD NEVER RUN`, the lab failed.
 
 In a real system, the stronger design is not to register unauthorized tools at all.
+
+## Additional current lab — Interventions
+
+```bash
+python interventions.py
+```
+
+Hooks are low-level lifecycle callbacks. Interventions return typed control decisions such as Proceed, Deny, Guide, Confirm, and Transform.

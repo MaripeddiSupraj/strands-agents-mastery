@@ -30,3 +30,15 @@ ANTHROPIC_API_KEY=... MODEL_PROVIDER=anthropic ANTHROPIC_MODEL_ID=<current-model
 ```
 
 Compare tool selection, arguments, latency, total tokens and unsupported claims. Model IDs evolve; choose current IDs from the provider docs.
+
+## Additional current lab — Model routing
+
+Choose two model IDs currently available to your Bedrock account/region:
+
+```bash
+PRIMARY_BEDROCK_MODEL_ID=<id> \
+BACKUP_BEDROCK_MODEL_ID=<id> \
+python model_routing.py
+```
+
+Model IDs and regional availability change; use the current provider docs rather than freezing course values.

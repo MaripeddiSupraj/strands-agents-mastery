@@ -47,3 +47,19 @@ The default Python path uses Amazon Bedrock, so configure an AWS identity that c
 Examples that need optional packages (MCP, A2A, Evals, AgentCore, provider extras) list the additional install command in their own README.
 
 The examples intentionally grow one scenario: a **Payments API Incident Assistant**.
+
+## Latest-surface companion labs
+
+The live Strands SDK has added several important first-class surfaces since the original roadmap was written. These are kept inside the matching lesson folder instead of creating random extra lesson numbers:
+
+- Lesson 01: `harness_quickstart.py`
+- Lesson 02: `structured_output.py`
+- Lesson 03: `tool_executor.py`
+- Lesson 04: `model_routing.py`
+- Lesson 06: `bidi_voice.py` (experimental)
+- Lesson 07: `interventions.py`
+- Lesson 11: `state.py` and `long_term_memory.py`
+- Lesson 13: `workflow.py`
+- Lesson 18: `sandbox.py` and `cedar_authorization.py`
+
+See [../appendices/current-strands-surface-map.md](../appendices/current-strands-surface-map.md) for the maintained live-doc coverage map.

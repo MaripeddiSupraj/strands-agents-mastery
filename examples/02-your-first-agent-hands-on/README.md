@@ -12,3 +12,11 @@ python main.py
 ```
 
 Change `payments-api` to an unknown service and compare the result.
+
+## Additional current lab — Structured output
+
+```bash
+python structured_output.py
+```
+
+This demonstrates the validated-object path used by APIs and downstream automation.
