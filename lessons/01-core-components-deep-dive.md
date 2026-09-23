@@ -425,6 +425,8 @@ The live Strands documentation now has two related layers:
 pip install strands-harness
 ~~~
 
+**Code sample — verified**
+
 ~~~python
 from strands_harness import create_harness
 
