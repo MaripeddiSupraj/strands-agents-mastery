@@ -20,6 +20,22 @@ This lesson goes deeper than the happy path.
 - A production loop policy
 - Tests to write before adding more capabilities
 
+
+## Recommended hands-on example — Payments API Incident Assistant
+
+> **Build today:** Trace one complete agent loop around a safe `get_service_status` tool.
+>
+> **Run:** `Check payments-api. If it is degraded, tell me the next diagnostic step without inventing a root cause.`
+>
+> **Expected flow:** user → model → `get_service_status("payments-api")` → tool result → model → final answer.
+>
+> **Observe:** the number of model turns, the tool call, total tokens, latency, and the final `stop_reason`.
+>
+> **Why this example:** it makes the agent loop visible. Do not move on until you can point to every model call and tool call in the trace.
+
+Keep this same incident assistant for later lessons. Each lesson will add one production capability instead of starting from a completely different demo.
+
+
 ## 1. The core loop
 
 A useful mental model is:
@@ -571,6 +587,35 @@ The lesson is not “higher is better.” It is to learn how task quality change
 6. Side-effect tools need downstream idempotency too.
 7. Traces and metrics are inspected while developing, not after launch.
 8. A budget limit is not an authorization boundary.
+
+
+## 20. Tool executors: concurrent by default, sequential when order matters
+
+Current Strands runs multiple tool calls returned in one model turn concurrently by default.
+
+When order or side effects matter, configure the sequential executor.
+
+**Code sample — verified**
+
+~~~python
+from strands import Agent
+from strands.tools.executors import SequentialToolExecutor
+
+agent = Agent(
+    tool_executor=SequentialToolExecutor(),
+    tools=[step_one, step_two],
+)
+~~~
+
+Production implications:
+
+- concurrency only happens when the model returns multiple tool requests in the same turn;
+- concurrent tool events can interleave;
+- sequential cancellation can prevent later tools from starting;
+- already-running concurrent tools need cooperative cancellation;
+- dependent writes should not be made concurrent merely for lower latency.
+
+Runnable lab: [tool_executor.py](../examples/03-how-agents-really-work/tool_executor.py).
 
 ## Sources checked
 

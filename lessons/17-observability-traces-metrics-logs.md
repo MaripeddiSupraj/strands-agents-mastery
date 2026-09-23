@@ -43,6 +43,22 @@ That is not enough to operate a production system.
 - Incident debugging
 - CI and deployment verification
 
+
+## Recommended hands-on example — Debug one slow incident request from trace to tool
+
+> **Build today:** Run the payments-api incident assistant with tracing/metrics enabled and investigate one intentionally slow request.
+>
+> **Question to answer from telemetry:** `Why did this request take 12 seconds?`
+>
+> **Trace the path:** Incident Commander → model call → observability specialist → MCP/CloudWatch tool → model call → final synthesis.
+>
+> **Observe:** model latency, tool latency, cycle count, token usage, retries, specialist calls, final `stop_reason`, and one correlation ID across the request.
+>
+> **Why this example:** observability becomes useful when it answers a concrete operational question, not when it merely proves that spans exist.
+
+Do not solve observability by exporting every prompt and raw log result. Make the request explainable without creating a sensitive-data archive.
+
+
 ## 1. Traces, metrics, and logs answer different questions
 
 ### Trace

@@ -35,6 +35,20 @@ It also gives you all the normal problems of distributed systems: network failur
 - Observability
 - Testing and deployment
 
+
+## Recommended hands-on example — Move one specialist behind a real service boundary
+
+> **Build today:** Keep the Incident Commander local, but deploy a Security/Compliance specialist separately and call it through A2A.
+>
+> **Run:** `INC-2841 contains repeated authentication failures. Ask the remote security specialist what evidence should be checked, then summarize it with the incident context.`
+>
+> **Observe:** remote Agent discovery/connection, authentication, network latency, timeout behavior, trace correlation, and what happens when the remote Agent is unavailable.
+>
+> **Why this example:** the concept becomes obvious when the learner sees the boundary change from “child Agent in my process” to “independently deployed service owned/scaled/versioned separately.”
+
+Treat A2A `context_id`/conversation identifiers as protocol state, not authentication or tenant authorization.
+
+
 ## 1. What A2A changes
 
 Local specialist:

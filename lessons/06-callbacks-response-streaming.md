@@ -23,6 +23,22 @@ This lesson separates three ideas:
 - Observability
 - Testing streams
 
+
+## Recommended hands-on example — Stream an incident investigation to the user
+
+> **Build today:** Stream progress from the same incident assistant while it performs a documentation/tool lookup.
+>
+> **Run:** `Investigate the payments-api throttling symptom and explain the next safe diagnostic step.`
+>
+> **User experience to aim for:** show a safe status such as “Checking AWS documentation…” quickly, stream the final explanation as it becomes available, then emit one clear completion event.
+>
+> **Observe:** time to first useful output, tool-start/tool-end timing, final task duration, and what internal events you intentionally *do not* expose to the browser.
+>
+> **Why this example:** learners can see that streaming is an interface/UX concern around the same agent loop—not a different kind of agent.
+
+Do not forward raw MCP/tool payloads just because they appear in the event stream.
+
+
 ## 1. Non-streaming invocation
 
 The ordinary call waits until the agent invocation completes.
@@ -434,6 +450,41 @@ Buffering remains bounded.
 - [ ] Final success/failure is explicit.
 - [ ] Time-to-first-output and total duration are measured.
 - [ ] Streaming compatibility with PII policy is documented.
+
+
+## 16. Advanced/experimental: BidiAgent is a different streaming model
+
+Standard `Agent.stream_async()` remains request/response streaming.
+
+Current Strands also documents `BidiAgent` for persistent bidirectional connections used by realtime voice/audio and interruption-heavy experiences. Strands marks it **experimental** and Python-only at the time of this audit.
+
+**Code sample — verified**
+
+~~~python
+import asyncio
+
+from strands.experimental.bidi import BidiAgent, BidiAudioIO
+from strands.experimental.bidi.models import BedrockNovaSonicModel
+
+model = BedrockNovaSonicModel()
+agent = BidiAgent(
+    model=model,
+    system_prompt="You are a concise incident-response voice assistant.",
+)
+audio_io = BidiAudioIO()
+
+async def main():
+    await agent.run(
+        inputs=[audio_io.input()],
+        outputs=[audio_io.output()],
+    )
+
+asyncio.run(main())
+~~~
+
+Use BidiAgent only when persistent realtime streaming and interruptions are actual requirements.
+
+Runnable experimental lab: [bidi_voice.py](../examples/06-callbacks-response-streaming/bidi_voice.py).
 
 ## Sources checked
 

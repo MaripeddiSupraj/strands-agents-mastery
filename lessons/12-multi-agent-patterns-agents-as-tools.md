@@ -34,6 +34,25 @@ This pattern is a strong default when delegation is clear and you still want one
 - Evaluation
 - When not to use this pattern
 
+
+## Recommended hands-on example — Split the incident assistant into two specialists
+
+> **Build today:** Turn the single payments-api assistant into one Incident Commander plus two specialist Agents:
+>
+> **Observability specialist:** investigates current telemetry.  
+> **AWS docs specialist:** researches authoritative service behavior.
+>
+> **Run:** `payments-api is returning throttling errors and latency is up. Investigate what is happening and tell me the next safe step.`
+>
+> **Expected behavior:** the commander chooses the specialist it needs, receives that specialist’s result, and owns the final user-facing answer.
+>
+> **Observe:** which specialist was selected, how many extra model calls were added, specialist token/latency cost, and whether privilege/tool sets remain isolated.
+>
+> **Why this example:** it demonstrates the strongest default multi-agent pattern: delegation is clear, but one Agent still owns the conversation.
+
+Do not create a specialist merely to make the architecture look “multi-agent.” Each specialist should own a real domain/tool boundary.
+
+
 ## 1. Why not one giant Agent?
 
 You could build one Agent with:

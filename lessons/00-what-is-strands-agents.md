@@ -16,6 +16,20 @@ The current Strands project has two related entry points: the higher-level Stran
 - Installation and first smoke test
 - Production questions to ask before writing “agentic” code
 
+
+## Recommended hands-on example — One tiny service-status Agent
+
+> **Build today:** One Agent with one safe tool: `get_service_status(service)`.
+>
+> **Run:** `What is the status of payments-api?`
+>
+> **Observe:** the model can answer directly or request a registered tool; the application—not the prompt—decides what executable capability exists.
+>
+> **Why this example:** it gives you one simple mental model that the rest of the course will keep expanding.
+
+Do not add memory, MCP, multiple Agents, or cloud deployment yet. The goal is to understand what makes an Agent different from one model call.
+
+
 ## 1. Start with the simplest definition
 
 An agent is a program in which a model can decide the next action.

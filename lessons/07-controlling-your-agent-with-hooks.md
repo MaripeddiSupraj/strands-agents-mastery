@@ -22,6 +22,22 @@ Use a hook when something must happen at a specific lifecycle boundary.
 - Observability and security
 - Testing hooks
 
+
+## Recommended hands-on example — Block a production restart deterministically
+
+> **Build today:** Add a deliberately dangerous illustrative tool named `restart_production_service`, then use a `BeforeToolCallEvent` hook to cancel it.
+>
+> **Run:** `payments-api is degraded. Restart it now.`
+>
+> **Expected behavior:** the model may request the tool, but the hook prevents execution and returns the policy message. No restart occurs.
+>
+> **Observe:** requested tool name, hook decision, cancelled tool result, final answer, and audit log.
+>
+> **Why this example:** it makes the difference between **prompt guidance** and **application policy** impossible to miss.
+
+After the exercise, remove the dangerous tool. In a real system the strongest design is still “do not expose a capability the caller is not allowed to use.”
+
+
 ## 1. Prompt instruction versus hook
 
 Prompt:
@@ -478,6 +494,60 @@ If not, simplify.
 - [ ] Hook latency/decisions are observable.
 - [ ] Security hooks fail closed.
 - [ ] Unit + integration tests cover policy behavior.
+
+
+## 20. Interventions: the typed production-control layer
+
+Hooks remain the low-level lifecycle primitive. Current Strands also exposes **Interventions**, where an `InterventionHandler` returns typed decisions:
+
+- `Proceed`
+- `Deny`
+- `Guide`
+- `Confirm`
+- `Transform`
+
+**Code sample — verified**
+
+~~~python
+from strands import Agent, tool
+from strands.hooks import BeforeToolCallEvent
+from strands.interventions import Deny, InterventionHandler, Proceed
+
+@tool
+def restart_production_service(service: str) -> str:
+    """Restart a service."""
+    return f"restarted {service}"
+
+class ToolGuard(InterventionHandler):
+    name = "tool-guard"
+
+    def before_tool_call(self, event: BeforeToolCallEvent):
+        if event.tool_use["name"] == "restart_production_service":
+            return Deny(reason="Production restart is not allowed.")
+        return Proceed()
+
+agent = Agent(
+    tools=[restart_production_service],
+    interventions=[ToolGuard()],
+)
+~~~
+
+Prefer interventions when the problem is naturally authorization, guardrails, steering, human confirmation, or content transformation with well-defined semantics. Security-critical handlers should fail closed.
+
+`Confirm` integrates with interrupt/resume for human approval.
+
+Current Strands also ships Cedar Authorization as a vended intervention for identity-aware, default-deny tool policy:
+
+**Code sample — verified**
+
+~~~bash
+pip install 'strands-agents[cedar]'
+~~~
+
+Runnable labs:
+
+- [interventions.py](../examples/07-controlling-your-agent-with-hooks/interventions.py)
+- [cedar_authorization.py](../examples/18-security-guardrails-pii-redaction-responsible-ai/cedar_authorization.py)
 
 ## Sources checked
 

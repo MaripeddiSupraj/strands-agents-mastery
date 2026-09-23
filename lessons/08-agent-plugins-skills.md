@@ -24,6 +24,22 @@ That distinction matters because an instruction package is not an authorization 
 - Session persistence
 - Supply-chain and testing concerns
 
+
+## Recommended hands-on example — Package the incident-response playbook as a Skill
+
+> **Build today:** Create an `incident-response` Skill that teaches the assistant one reusable procedure: establish symptom/time window → gather evidence → separate facts from hypotheses → recommend the smallest next check.
+>
+> **Run:** `payments-api latency increased after 10:12 UTC. Investigate this like an on-call engineer.`
+>
+> **Expected behavior:** the Skill shapes *how* the agent approaches the incident, while its actual executable capabilities still come only from registered tools.
+>
+> **Observe:** when the Skill is discovered/activated, what instructions enter context, and whether token usage changes.
+>
+> **Why this example:** learners can see the clean separation: **Skill = reusable know-how; tool = executable capability; plugin = executable extension behavior.**
+
+Do not put credentials, authorization decisions, or destructive permissions inside a Skill.
+
+
 ## 1. Plugin versus Skill
 
 Think of a plugin as executable extension behavior:

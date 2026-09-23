@@ -24,6 +24,22 @@ It is not a replacement for authorization.
 - Observability
 - Evaluation and failure cases
 
+
+## Recommended hands-on example — Steer away from a wasteful investigation
+
+> **Build today:** Give the incident assistant a scenario where a broad log query has already failed or produced too much data, then use Steering to guide the next attempt toward a narrower evidence query.
+>
+> **Run:** `Investigate payments-api errors from the last hour.`
+>
+> **Desired behavior:** after seeing that a broad query is unhelpful, Steering provides just-in-time guidance such as narrowing the time window or filtering by service/error signal instead of repeating the same expensive action.
+>
+> **Observe:** the steering decision, extra model work/latency, whether the tool trajectory improves, and whether repeated failed calls decrease.
+>
+> **Why this example:** Steering is easiest to understand when the agent is *allowed* to continue but needs better guidance. A hook would be a better fit when an action must be deterministically blocked.
+
+Treat this section as a behavior lab. Use only the exact Steering API shown later in this lesson and in the current reference; do not invent handler syntax.
+
+
 ## 1. The problem with one giant prompt
 
 A large Agent might need guidance such as:

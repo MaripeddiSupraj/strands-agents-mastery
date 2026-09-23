@@ -21,6 +21,20 @@ Changing a model can change tool selection, latency, cost, structured-output qua
 - A provider evaluation matrix
 - Testing a provider migration
 
+
+## Recommended hands-on example — Run the same incident prompt on two models
+
+> **Build today:** Keep the Payments API Incident Assistant unchanged and swap only its model provider.
+>
+> **Run on both providers:** `Check payments-api. If it is degraded, tell me the next diagnostic step without inventing a root cause.`
+>
+> **Compare:** Did both models call the same tool? Did they pass the same argument? How many turns/tokens did each use? Which was faster? Did either invent unsupported detail?
+>
+> **Why this example:** provider portability should be measured with the *same task*. If you change the prompt, tools, and provider together, you cannot tell what caused the behavior change.
+
+Your goal is not to decide that one provider is universally “best.” Your goal is to prove whether a provider change preserves the behavior this application needs.
+
+
 ## 1. The stable part of the application
 
 At a high level:
@@ -50,6 +64,8 @@ pip install 'strands-agents[anthropic]'
 ~~~
 
 It also documents:
+
+**Code sample — verified**
 
 ~~~bash
 pip install 'strands-agents[all]'
@@ -528,6 +544,34 @@ Do not judge from prose style alone.
 6. Measure whole-task cost, not token price alone.
 7. Treat fallback routing as a security/compliance decision.
 8. Keep provider/model identity observable.
+
+
+## 21. Model routing: selecting or failing over between models
+
+Current Strands exposes `ModelRouter` for choosing among a fixed set of stateless candidates.
+
+Use cases include ordered fallback after an unclaimed model failure and routing different request classes to different models.
+
+**Code sample — verified API shape**
+
+~~~python
+from strands import Agent
+from strands.models import BedrockModel, ModelRouter
+
+primary_model = BedrockModel(model_id="<primary-model-id>")
+backup_model = BedrockModel(model_id="<backup-model-id>")
+
+router = ModelRouter(models=[primary_model, backup_model])
+
+agent = Agent(model=router)
+agent("Investigate the payments-api symptom.")
+~~~
+
+Retry and routing are different layers: the selected model's retry strategy gets the first chance; unclaimed failure can then cause a router switch.
+
+Cross-provider routing is also a data/compliance boundary. Every fallback candidate must be approved for the same workload data.
+
+Runnable lab: [model_routing.py](../examples/04-switching-model-providers/model_routing.py).
 
 ## Sources checked
 

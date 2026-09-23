@@ -14,6 +14,22 @@ This lesson turns the component map into something you can run. Keep the first a
 - Diagnose common failures
 - Define a small test boundary
 
+
+## Recommended hands-on example — Start the running Payments API Incident Assistant
+
+> **Build today:** Use the lesson's `get_service_status` tool as the first version of the course's running incident assistant.
+>
+> **Run:** `Check payments-api. If it is degraded, explain what you know without inventing a root cause.`
+>
+> **Expected behavior:** one safe tool call, one bounded result, and a final answer that distinguishes the returned status from unsupported explanation.
+>
+> **Observe:** loaded tool names, token usage, tool metrics, and the effect of input validation.
+>
+> **Why this example:** this becomes the baseline. Lessons 03–20 will keep the same story and add loop control, providers, MCP, streaming, hooks, memory, multi-agent orchestration, evaluation, security, and deployment.
+
+Save this working baseline before adding anything else.
+
+
 ## 1. Prerequisites
 
 Current Python quickstart requirements:
@@ -334,6 +350,37 @@ Before you expose even this tiny agent through an API:
 - [ ] at least one behavioral regression case exists.
 
 The next lesson gives you the missing piece: hard bounds around the loop itself.
+
+
+## 18. Structured output: when prose is not enough
+
+Current Strands supports schema-validated output. In Python, define a Pydantic model, pass it as `structured_output_model`, then read the validated object from `result.structured_output`.
+
+**Code sample — verified**
+
+~~~python
+from pydantic import BaseModel, Field
+from strands import Agent
+
+class IncidentSummary(BaseModel):
+    service: str = Field(description="Affected service")
+    status: str = Field(description="Observed status")
+    next_step: str = Field(description="Recommended next diagnostic step")
+
+agent = Agent()
+
+result = agent(
+    "payments-api is degraded. Return a concise incident summary.",
+    structured_output_model=IncidentSummary,
+)
+
+summary: IncidentSummary = result.structured_output
+print(summary.model_dump_json(indent=2))
+~~~
+
+Use structured output for API contracts, workflow handoffs, database/event payloads, and typed multi-agent boundaries. Handle structured-output validation failure as an application error path.
+
+Runnable lab: [structured_output.py](../examples/02-your-first-agent-hands-on/structured_output.py).
 
 ## Sources checked
 

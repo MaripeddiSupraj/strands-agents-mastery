@@ -36,6 +36,24 @@ That gives you a useful balance:
 - Testing graphs
 - Graph versus Workflow, Agents-as-Tools, and Swarm
 
+
+## Recommended hands-on example — Make the incident investigation path explicit
+
+> **Build today:** Express a payments-api investigation as a Graph where the application controls the allowed path:
+>
+> `collect evidence → analyze evidence → independently check AWS docs → produce incident report`
+>
+> Add a review/revisit path only when the analysis says evidence is insufficient.
+>
+> **Run:** `Investigate INC-2841 and produce an evidence-backed incident summary.`
+>
+> **Observe:** node order, parallel/conditional paths where used, revisit count, timeout/iteration bounds, and the output contributed by each node.
+>
+> **Why this example:** the learner can compare it directly with Lesson 12. Agents-as-Tools lets the commander choose delegation dynamically; Graph makes the allowed workflow itself explicit.
+
+Use the verified `GraphBuilder` syntax later in this lesson. The block above is the recommended scenario, not a substitute API.
+
+
 ## 1. Why Graph exists
 
 Imagine a report pipeline:
@@ -602,6 +620,49 @@ A new edge to a privileged node deserves security review.
 - [ ] Each node is observable independently.
 - [ ] Cyclic non-convergence is tested.
 - [ ] Cost impact of fan-out is measured.
+
+
+## 28. Workflow is a distinct multi-agent pattern
+
+Current Strands documents **Workflow** separately from Graph.
+
+Use Workflow when execution is a fixed task sequence/DAG with explicit dependencies.
+
+| Pattern | Who decides the next path? | Best fit |
+| --- | --- | --- |
+| Agents as Tools | Orchestrator model | Dynamic delegation |
+| Graph | Explicit graph structure | Branching/cycles |
+| Swarm | Peer agents | Emergent collaboration |
+| Workflow | Task dependency graph | Repeatable DAG/pipeline |
+
+Current docs show manual workflow composition and a built-in `strands_tools.workflow` tool.
+
+**Code sample — verified**
+
+~~~python
+from strands import Agent
+
+collector = Agent(
+    system_prompt="Collect incident evidence.",
+    callback_handler=None,
+)
+analyst = Agent(
+    system_prompt="Analyze evidence and separate facts from hypotheses.",
+    callback_handler=None,
+)
+writer = Agent(
+    system_prompt="Write a concise incident report.",
+)
+
+def process_workflow(incident: str):
+    evidence = collector(f"Collect evidence for: {incident}")
+    analysis = analyst(f"Analyze this evidence: {evidence}")
+    return writer(f"Write the report from this analysis: {analysis}")
+~~~
+
+Use Workflow instead of Swarm when a different process path would be a bug.
+
+Runnable lab: [workflow.py](../examples/13-multi-agent-patterns-graph-workflows/workflow.py).
 
 ## Sources checked
 
